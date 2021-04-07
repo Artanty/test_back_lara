@@ -14,9 +14,9 @@ class DatabaseSeeder extends Seeder
 
     public function run()
     {
-        for ($i=0; $i < 10; $i++) {
+        for ($i=1; $i < 11; $i++) {
             DB::table('products')->insert([
-                'name' => Str::random(10),
+                'name' => 'Продукт_'.$i,
                 'price' => rand(10, 50)
             ]);
         }

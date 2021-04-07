@@ -8,6 +8,9 @@ class Order extends Model
 {
     public function product()
     {
-        return $this->hasOne('App\Product','productId');
+        return $this->hasOne('App\Product','id','productId');
+
+
     }
+
 }
