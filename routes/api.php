@@ -20,4 +20,4 @@ Route::get('/test', function () {
     return 'Hello World';
 });
 
-Route::get('/test2', 'Product@index');
+Route::get('/createOrder', 'OrderController@create');
