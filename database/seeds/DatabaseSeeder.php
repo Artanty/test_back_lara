@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -9,8 +11,14 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        for ($i=0; $i < 10; $i++) {
+            DB::table('products')->insert([
+                'name' => Str::random(10),
+                'price' => rand(10, 50)
+            ]);
+        }
     }
 }
