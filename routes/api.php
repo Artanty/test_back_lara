@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\Controller;
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,4 +20,4 @@ Route::get('/test', function () {
     return 'Hello World';
 });
 
-Route::get('/test2', 'App\Http\Controllers\Product@index');
+Route::get('/test2', 'Product@index');
