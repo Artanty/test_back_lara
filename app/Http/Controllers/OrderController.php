@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Order;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
-    // TODO comment
+
     public function getOrders(Request $request){
 
         $orders = Order::join('products','products.id','=','orders.productId')
@@ -21,27 +22,23 @@ class OrderController extends Controller
                 'orders.sum as order_sum'
             )->get();
 
-        if(isset($request->discount) && $request->discount > 0){
+        if(isset($request->discount)){
             $discount = (100 - $request->discount) * 0.01;
-            return collect($orders)->map(function($item) use ($discount) {
+            $orders = collect($orders)->map(function($item) use ($discount) {
                 $item->order_sum = floor($item->order_sum * $discount);
                 return $item;
             });
         }
 
-        return response()->json($orders);
+        $headers = [ 'Content-Type' => 'application/json; charset=utf-8' ];
+        return response()->json($orders, 200, $headers, JSON_UNESCAPED_UNICODE);
+
     }
 
-    // TODO mass assigment
     public function create(Request $request){
-        $order = new Order;
-        $order->productId = $request->productId;
-        $count = $request->count ?: 1;
-        $order->count = $count;
-        $product = Product::find($request->productId);
-        $order->sum = $count * $product->price;
-        $order->save();
+        $order = (array)$request->input();
+        $order['sum'] = ($request->count ?: 1) * Product::find($request->productId)->price;
 
-        return response()->json($order);
+        return Order::create($order);
     }
 }

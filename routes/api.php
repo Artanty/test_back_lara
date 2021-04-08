@@ -17,5 +17,5 @@ Route::get('/test', function () {
     return 'Hello World';
 });
 
-Route::get('/create_order', 'OrderController@create');
+Route::post('/create_order', 'OrderController@create');
 Route::get('/get_orders', 'OrderController@getOrders');
