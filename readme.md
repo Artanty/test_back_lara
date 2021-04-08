@@ -1,3 +1,28 @@
+## Init project:
+
+1. `php composer install`
+2. copy your .env file
+3. `php artisan key:generate`
+4. configure your settings in config/database (I used MAC OS & MAMP, mysql)
+5. `php artisan migrate`
+6. `php artisan db:seed`
+7. `php artisan serve` (mine is on http://127.0.0.1:8000)
+
+## Check routes
+show routes:
+`php artisan route:list`
+
+create order using productId
+(method: POST)
+`http://127.0.0.1:8000/api/create_order?productId=4&count=3`
+
+get order list with products
+`http://127.0.0.1:8000/api/get_orders`
+
+get order list with products with discount 10%
+`http://127.0.0.1:8000/api/get_orders?discount=10`
+
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
